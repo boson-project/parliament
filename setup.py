@@ -5,8 +5,8 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name='parlaiment',
-    packages=['parlaiment'],
+    name='parliament',
+    packages=['parliament'],
     version='0.0.1',
     license='MIT',
     description='A framework for invoking functions over HTTP',
@@ -14,7 +14,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Lance Ball',
     author_email='lball@redhat.com',
-    url='https://github.com/lance/parlaiment',
+    url='https://github.com/boson-project/parliament',
     keywords=['faas', 'functions', 'openshift'],
 
     install_requires=['cloudevents', 'flask', 'waitress'],
