@@ -5,9 +5,9 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name='parliament',
+    name='parliament-functions',
     packages=['parliament'],
-    version='0.0.1',
+    version='0.0.3',
     license='MIT',
     description='A framework for invoking functions over HTTP',
     long_description=README,
@@ -22,7 +22,7 @@ setup(
     classifiers=[],
     entry_points={
       "console_scripts": [
-        "parlaiment=parlaiment.__main__:main",
+        "parliament=parliament.__main__:main",
       ]
     },
 )
