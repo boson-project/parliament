@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 setup(
     name='parliament-functions',
     packages=['parliament'],
-    version='0.0.3',
+    version='0.0.5',
     license='MIT',
     description='A framework for invoking functions over HTTP',
     long_description=README,
