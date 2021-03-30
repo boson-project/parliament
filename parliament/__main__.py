@@ -5,8 +5,16 @@ import sys, os
 from flask import Flask, request
 from cloudevents.http import from_http
 from waitress import serve
+import signal
 
 def main():
+  def receive_signal(signal_number, frame):
+    sys.exit(128 + signal_number)
+    return
+
+  signal.signal(signal.SIGTERM, receive_signal)
+  signal.signal(signal.SIGINT, receive_signal)
+
   load_function()
   import func
 
