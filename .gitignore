@@ -1,5 +1,6 @@
 dist
 build
+/.coverage
 __pycache__
 /*.token
 /*.egg-info
