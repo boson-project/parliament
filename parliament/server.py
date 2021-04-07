@@ -6,6 +6,9 @@ from cloudevents.http import from_http
 
 
 def load(path):
+  """
+  Load a python file with a main() function and return the module
+  """
   func_dir = os.path.realpath(path)
   sys.path.append(func_dir)
   import func
@@ -13,6 +16,9 @@ def load(path):
 
 
 def create(func):
+  """
+  Create a Flask app with kube health endpoints, exposing 'func' at /
+  """
   app = Flask(__name__)
 
   @app.route("/", methods=["POST"])
@@ -26,7 +32,6 @@ def create(func):
       app.logger.warning('No CloudEvent available')
 
     try:
-      print(request.json)
       return func.main(context)
     except Exception as err:
       return f"Function threw {err}", 500

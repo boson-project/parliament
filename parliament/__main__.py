@@ -8,6 +8,10 @@ from . import server
 
 
 def main():
+  """
+  Loads a python function, specified by the first command line
+  argument, and serves it using the parliament server.
+  """
   if (len(sys.argv) != 2):
     print("Usage: python -m", __file__, "<path/to/func.py>")
     exit(1)
