@@ -1,7 +1,7 @@
 ci: lint test
 
 lint:
-	flake8 --indent-size 2 parliament tests
+	flake8 parliament tests
 
 test:
 	python -m pytest -s -v --cov parliament tests/*test.py
