@@ -1,8 +1,30 @@
 import os
 import sys
 
-from flask import Flask, request
-from cloudevents.http import from_http
+from flask import Flask, request, Request
+from cloudevents.http import from_http, CloudEvent
+
+
+class Context(object):
+    """
+    Class holding invocation context.
+
+    ...
+
+    Attributes
+    ----------
+    request:
+        Flask HTTP request
+    cloud_event:
+        CloudEvent if any
+    """
+    request: Request
+    cloud_event: CloudEvent
+    __slots__ = ['request', 'cloud_event']
+
+    def __init__(self, req: Request):
+        self.request = req
+        self.cloud_event = None
 
 
 def load(path):
@@ -23,12 +45,10 @@ def create(func):
 
     @app.route("/", methods=["POST"])
     def handle_post():
-        context = {
-            'request': request
-        }
+        context = Context(request)
         try:
-            context['cloud_event'] = from_http(
-                request.headers, request.get_data())
+            context.cloud_event = from_http(request.headers,
+                                            request.get_data())
         except Exception:
             app.logger.warning('No CloudEvent available')
 
@@ -39,9 +59,7 @@ def create(func):
 
     @app.route("/", methods=["GET"])
     def handle_get():
-        context = {
-            'request': request
-        }
+        context = Context(request)
         return func.main(context)
 
     @app.route("/health/liveness")
