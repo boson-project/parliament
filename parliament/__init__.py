@@ -2,7 +2,8 @@
 
 from .invocation import Context
 from . import server
+from . import version
 
 
-__version__ = "0.0.5"
+__version__ = version.__version__
 __all__ = ["server", "Context"]
