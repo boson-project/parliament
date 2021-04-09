@@ -1,5 +1,6 @@
 from setuptools import setup
 import pathlib
+import parliament
 
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
@@ -7,7 +8,7 @@ README = (HERE / "README.md").read_text()
 setup(
     name='parliament-functions',
     packages=['parliament'],
-    version='0.0.5',
+    version=parliament.__version__,
     license='MIT',
     description='A framework for invoking functions over HTTP',
     long_description=README,
