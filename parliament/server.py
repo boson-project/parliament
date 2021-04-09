@@ -1,30 +1,9 @@
 import os
 import sys
 
-from flask import Flask, request, Request
-from cloudevents.http import from_http, CloudEvent
-
-
-class Context(object):
-    """
-    Class holding invocation context.
-
-    ...
-
-    Attributes
-    ----------
-    request:
-        Flask HTTP request
-    cloud_event:
-        CloudEvent if any
-    """
-    request: Request
-    cloud_event: CloudEvent
-    __slots__ = ['request', 'cloud_event']
-
-    def __init__(self, req: Request):
-        self.request = req
-        self.cloud_event = None
+from flask import Flask, request
+from cloudevents.http import from_http
+from .invocation import Context
 
 
 def load(path):

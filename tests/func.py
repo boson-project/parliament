@@ -1,4 +1,4 @@
-from parliament.server import Context
+from parliament import Context
 
 
 def main(context: Context):
