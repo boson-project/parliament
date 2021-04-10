@@ -1,8 +1,9 @@
 import os
 import sys
+import traceback
 
 from flask import Flask, request
-from cloudevents.http import from_http
+from cloudevents.http import CloudEvent, from_http, to_binary
 from .invocation import Context
 
 
@@ -30,16 +31,12 @@ def create(func):
                                             request.get_data())
         except Exception:
             app.logger.warning('No CloudEvent available')
-
-        try:
-            return func.main(context)
-        except Exception as err:
-            return f"Function threw {err}", 500
+        return invoke(func, context)
 
     @app.route("/", methods=["GET"])
     def handle_get():
         context = Context(request)
-        return func.main(context)
+        return invoke(func, context)
 
     @app.route("/health/liveness")
     def liveness():
@@ -50,3 +47,17 @@ def create(func):
         return "OK"
 
     return app
+
+
+def invoke(func, context):
+    try:
+        resp = func.main(context)
+        if isinstance(resp, CloudEvent):
+            headers, body = to_binary(resp)
+            return body, headers
+        else:
+            return resp
+    except Exception as err:
+        traceback.print_exc()
+        print("caught", err)
+        return f"Function raised {err}", 500

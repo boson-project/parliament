@@ -1,8 +1,8 @@
 cloudevents==1.2.0
 flake8==3.9.0
 pytest==6.2.3
-pytest-cov==2.11.1
 Flask==1.1.2
+coverage
 waitress
 wheel
 twine
