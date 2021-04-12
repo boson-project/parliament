@@ -7,7 +7,7 @@ from parliament import server
 @pytest.fixture
 def client():
     """
-    Configure a client fixture to be used for integraton tests
+    Configure a client fixture to be used for integration tests
     """
     func = f"{sys.path[0]}/event"
     app = server.create(server.load(func))

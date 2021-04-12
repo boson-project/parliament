@@ -41,7 +41,7 @@ def test_accepts_source():
 
 def test_accepts_type():
     """
-    Test that the @event decorator accepts a 'source' parameter
+    Test that the @event decorator accepts a 'type' parameter
     """
     @event(event_type="parliament.test")
     def f():
