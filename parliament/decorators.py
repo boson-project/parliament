@@ -23,6 +23,8 @@ def event(_func=None, *,
         @functools.wraps(func)
         def event_wrapper(*args, **kwargs):
             data = func(*args, **kwargs)
+            if isinstance(data, CloudEvent):
+                return data
             attributes = {
               "type": event_type,
               "source": event_source
