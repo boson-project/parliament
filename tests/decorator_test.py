@@ -62,3 +62,21 @@ def test_event_data():
         return data
     ce = f("test value")
     assert ce.data == "test value"
+
+
+def test_handles_returned_events():
+    """
+    Test that the @event decorator can detect when a function
+    has returned a CloudEvent, and simply pass it on.
+    """
+    @event
+    def f() -> CloudEvent:
+        attributes = {
+          "type": "user.type",
+          "source": "/user/source"
+        }
+        return CloudEvent(attributes, "Hola!")
+    ce = f()
+    assert ce.data == "Hola!"
+    assert ce["type"] == "user.type"
+    assert ce["source"] == "/user/source"
