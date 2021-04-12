@@ -14,7 +14,7 @@ def test_load():
 
 def test_create():
     """
-    Test tha we can create a Flask app with the function
+    Test that we can create a Flask app with the function
     """
     app = server.create(server.load(f"{sys.path[0]}/http"))
     assert isinstance(app, Flask)

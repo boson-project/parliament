@@ -50,3 +50,15 @@ def test_accepts_type():
     assert ce["type"] == "parliament.test"
     assert ce["source"] == "/parliament/function"
     assert ce.data == "data"
+
+
+def test_event_data():
+    """
+    Test that the @event decorator includes the value
+    returned from invocation as the event data
+    """
+    @event
+    def f(data: str) -> str:
+        return data
+    ce = f("test value")
+    assert ce.data == "test value"
