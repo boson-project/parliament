@@ -4,7 +4,10 @@ lint:
 	flake8 parliament tests
 
 test:
-	python -m pytest -s -v --cov parliament tests/*test.py
+	coverage run --source parliament -m pytest -s tests/*test.py
+	coverage run --source parliament -a -m pytest -s tests/http/*test.py
+	coverage run --source parliament -a -m pytest -s tests/event/*test.py
+	coverage report -m
 
 publish-test:
 	python setup.py sdist bdist_wheel
