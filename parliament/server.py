@@ -1,6 +1,7 @@
 import os
 import sys
 import traceback
+import logging
 
 from flask import Flask, request
 from cloudevents.http import CloudEvent, from_http, to_binary
@@ -22,6 +23,7 @@ def create(func):
     Create a Flask app with kube health endpoints, exposing 'func' at /
     """
     app = Flask(__name__)
+    set_log_level(app, os.environ["LOG_LEVEL"])
 
     @app.route("/", methods=["POST"])
     def handle_post():
@@ -62,3 +64,22 @@ def invoke(func, context):
         traceback.print_exc()
         print("caught", err)
         return f"Function raised {err}", 500
+
+
+def set_log_level(app, level):
+    if level == "CRITICAL":
+        app.logger.setLevel(logging.CRITICAL)
+    elif level == "DEBUG":
+        app.logger.setLevel(logging.DEBUG)
+    elif level == "INFO":
+        app.logger.setLevel(logging.INFO)
+    elif level == "ERROR":
+        app.logger.setLevel(logging.ERROR)
+    elif level == "NOTSET":
+        app.logger.setLevel(logging.NOTSET)
+    elif level == "WARNING":
+        app.logger.setLevel(logging.WARNING)
+    elif level == "DISABLED":
+        app.logger.disabled = True
+    else:   # default
+        app.logger.setLevel(logging.WARNING)
