@@ -23,7 +23,7 @@ def create(func):
     Create a Flask app with kube health endpoints, exposing 'func' at /
     """
     app = Flask(__name__)
-    set_log_level(app, os.environ["LOG_LEVEL"])
+    set_log_level(app, os.environ.get("LOG_LEVEL", "WARNING"))
 
     @app.route("/", methods=["POST"])
     def handle_post():
