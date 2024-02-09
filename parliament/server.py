@@ -31,6 +31,7 @@ def create(func):
                                             request.get_data())
         except Exception:
             app.logger.warning('No CloudEvent available')
+            app.logger.exception(traceback.print_exc())
         return invoke(func, context)
 
     @app.route("/", methods=["GET"])
