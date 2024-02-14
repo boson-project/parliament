@@ -4,7 +4,8 @@ import traceback
 import logging
 
 from flask import Flask, request
-from cloudevents.http import CloudEvent, from_http, to_binary
+from cloudevents.http import CloudEvent
+from cloudevents.conversion import from_http, to_binary
 from .invocation import Context
 
 
