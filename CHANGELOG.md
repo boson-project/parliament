@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/boson-project/parliament/compare/v0.1.0...v0.2.0) (2024-02-21)
+
+
+### Features
+
+* actually use release-please correctly ([#22](https://github.com/boson-project/parliament/issues/22)) ([0ec7dba](https://github.com/boson-project/parliament/commit/0ec7dba52c4df815e30dc61646a05660577b86b6))
+* set log level with env variable ([#24](https://github.com/boson-project/parliament/issues/24)) ([86b84d8](https://github.com/boson-project/parliament/commit/86b84d8b30b788676724035fcea576898e0e0f3d))
+
+
+### Miscellaneous
+
+* **requirements:** update dependencies and CI ([#21](https://github.com/boson-project/parliament/issues/21)) ([7377b3d](https://github.com/boson-project/parliament/commit/7377b3d803a6788baded5501aad8731e75e0c662))
+
 ## [0.1.0](https://www.github.com/boson-project/parliament/compare/v0.0.5...v0.1.0) (2021-04-14)
 
 
