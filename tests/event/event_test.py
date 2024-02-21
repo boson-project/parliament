@@ -1,4 +1,5 @@
-from cloudevents.http import CloudEvent, to_binary
+from cloudevents.http import CloudEvent
+from cloudevents.conversion import to_binary
 
 
 def test_post_cloud_event(client):
