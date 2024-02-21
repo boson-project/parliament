@@ -4,7 +4,8 @@ import traceback
 import logging
 
 from flask import Flask, request
-from cloudevents.http import CloudEvent, from_http, to_binary
+from cloudevents.http import CloudEvent
+from cloudevents.conversion import from_http, to_binary
 from .invocation import Context
 
 
@@ -29,10 +30,11 @@ def create(func):
     def handle_post():
         context = Context(request)
         try:
-            context.cloud_event = from_http(request.headers,
+            context.cloud_event = from_http(CloudEvent, request.headers,
                                             request.get_data())
-        except Exception:
+        except Exception as e:
             app.logger.warning('No CloudEvent available')
+            app.logger.exception(e)
             app.logger.exception(traceback.print_exc())
         return invoke(func, context)
 
